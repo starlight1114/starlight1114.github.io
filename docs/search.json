@@ -1,16 +1,30 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "CDC_Data.html",
+    "href": "CDC_Data.html",
+    "title": "CDC Data",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "dc_datasets &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-11/cdc_datasets.csv')\nfpi_codes &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-11/fpi_codes.csv')\nomb_codes &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-11/omb_codes.csv')\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\ndc_datasets |&gt;\n  mutate(contact_name = fct_infreq(contact_name))|&gt;\n  mutate(contact_name_other = fct_lump(contact_name, 5)) |&gt;\n  ggplot(aes(x = contact_name_other, fill = contact_name_other)) +\n  geom_bar() +\n  theme(axis.text.x = element_blank())+\n  labs(\n    title = \"Most Common Contact Name for Datasets\",\n    x = \"\",\n    y = \"Count\",\n    fill = \"Contact name\"\n  )\n\n\n\n\n\n\n\n\nCitation:\n“Files for 20250128-Cdc-Datasets.” Internet Archive, https://archive.org/download/20250128-cdc-datasets."
+  },
+  {
+    "objectID": "Water_Insecurity.html",
+    "href": "Water_Insecurity.html",
+    "title": "Water Insecurity",
+    "section": "",
+    "text": "water_insecurity_2022 &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-01-28/water_insecurity_2022.csv')\nwater_insecurity_2023 &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-01-28/water_insecurity_2023.csv')\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\nwater_insecurity &lt;- water_insecurity_2023 |&gt;\n  head(848)|&gt;\n  mutate(\"old_percent_lacking_plumbing\" = pull(select(water_insecurity_2022, percent_lacking_plumbing))) |&gt;\n  mutate(\"2022\" = mean(old_percent_lacking_plumbing, na.rm = TRUE), \"2023\" = mean(percent_lacking_plumbing, na.rm = TRUE))|&gt;\n  head(1)|&gt;\n  pivot_longer(c(\"2022\", \"2023\"),names_to = \"yeare\", values_to = \"Average_percent_lacking_plumbing\") |&gt;\n  select(yeare, Average_percent_lacking_plumbing)\nggplot(water_insecurity, aes(x = yeare, y = Average_percent_lacking_plumbing)) +\n  geom_col() +\n  labs(\n    x = \"Year\",\n    y = \"Percent Without Plumbing across the US\",\n    title = \"(Not-so-honest) Plot of the percentage of houses without full \\nplumbing in 2022 and 2023\"\n  )\n\n\n\n\n\n\n\n\nCitation:\nElmera Azadpour and Cee Nell. Mapping Water Insecurity in R with Tidycensus. 9 Dec. 2024, https://waterdata.usgs.gov/blog/acs-maps/."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "starlight1114.github.io",
+    "title": "DS2 Project",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "This is my website that is for Foundations of Data Science. Here is some basic information about me. I am a student that is doing Foundations of Data Science. This is something I made in my art class in Adobe Illustrator."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This site is a site with some Tidy Tuesday datasets."
   }
 ]
