@@ -1,0 +1,43 @@
+---
+title: "Water Insecurity"
+description: |
+  Analysis of Water Insecurity data from TidyTuesday
+author: Niha Pereira
+date: January 28, 2025
+links:
+  - text: GitHub
+    href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-01-28/readme.md
+format: html
+execute: 
+  warning: false
+  message: false
+---
+
+```{r}
+water_insecurity_2022 <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-01-28/water_insecurity_2022.csv')
+water_insecurity_2023 <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-01-28/water_insecurity_2023.csv')
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+water_insecurity <- water_insecurity_2023 |>
+  head(848)|>
+  mutate("old_percent_lacking_plumbing" = pull(select(water_insecurity_2022, percent_lacking_plumbing))) |>
+  mutate("2022" = mean(old_percent_lacking_plumbing, na.rm = TRUE), "2023" = mean(percent_lacking_plumbing, na.rm = TRUE))|>
+  head(1)|>
+  pivot_longer(c("2022", "2023"),names_to = "yeare", values_to = "Average_percent_lacking_plumbing") |>
+  select(yeare, Average_percent_lacking_plumbing)
+ggplot(water_insecurity, aes(x = yeare, y = Average_percent_lacking_plumbing)) +
+  geom_col() +
+  labs(
+    x = "Year",
+    y = "Percent Without Plumbing across the US",
+    title = "(Not-so-honest) Plot of the percentage of houses without full \nplumbing in 2022 and 2023"
+  )
+  
+```
+
+Citation:
+
+Elmera Azadpour and Cee Nell. *Mapping Water Insecurity in R with Tidycensus*. 9 Dec. 2024, <https://waterdata.usgs.gov/blog/acs-maps/>.

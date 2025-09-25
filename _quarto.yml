@@ -3,20 +3,27 @@ project:
   output-dir: docs
 
 website:
-  title: "starlight1114.github.io"
+  title: "Project Website with Art"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - text: "Data Viz"
+        menu: 
+         - text: "CDC Data"
+           href: CDC_Data.qmd
+         - text: "Water Insecurity"
+           href: Water_Insecurity.html
 
 format:
   html:
     theme:
-      - cosmo
+      - sandstone
       - brand
     css: styles.css
     toc: true
+    page-layout: full
 
 editor: visual
 

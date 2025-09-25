@@ -1,11 +1,14 @@
 ---
-title: "starlight1114.github.io"
+title: "DS2 Project"
+image: ART21.jpg
+toc: false
+about: 
+  template: jolla
+  image-shape: rectangle
+  image-width: 17em
+  links:
+    - text: GitHub
+      href: https://github.com/starlight1114
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+This is my website that is for Foundations of Data Science. Here is some basic information about me. I am a student that is doing Foundations of Data Science. This is something I made in my art class in Adobe Illustrator.

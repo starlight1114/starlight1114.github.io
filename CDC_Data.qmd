@@ -1,0 +1,42 @@
+---
+title: "CDC Data"
+description: |
+  Analysis of CDC data from TidyTuesday
+author: Jon Harmon
+date: February 11, 2025
+links:
+  - text: GitHub
+    href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-02-11/readme.md 
+format: html
+execute: 
+  warning: false
+  message: false
+---
+
+```{r}
+dc_datasets <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-11/cdc_datasets.csv')
+fpi_codes <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-11/fpi_codes.csv')
+omb_codes <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-11/omb_codes.csv')
+library(tidyverse)
+library(ggplot2)
+
+```
+
+```{r}
+dc_datasets |>
+  mutate(contact_name = fct_infreq(contact_name))|>
+  mutate(contact_name_other = fct_lump(contact_name, 5)) |>
+  ggplot(aes(x = contact_name_other, fill = contact_name_other)) +
+  geom_bar() +
+  theme(axis.text.x = element_blank())+
+  labs(
+    title = "Most Common Contact Name for Datasets",
+    x = "",
+    y = "Count",
+    fill = "Contact name"
+  )
+```
+
+Citation:
+
+“Files for 20250128-Cdc-Datasets.” *Internet Archive*, <https://archive.org/download/20250128-cdc-datasets>.
