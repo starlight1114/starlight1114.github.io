@@ -1,0 +1,14 @@
+---
+title: "Text_analysis"
+description: |
+  An analysis of text data from 
+author: Niha Pereira
+date: January 28, 2025
+links:
+  - text: GitHub
+    href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-01-28/readme.md
+format: html
+execute: 
+  warning: false
+  message: false
+---
