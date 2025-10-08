@@ -1,12 +1,14 @@
 ---
 title: "Text_analysis"
 description: |
-  An analysis of text data from 
-author: Niha Pereira
-date: January 28, 2025
+  An analysis of General Transit Feed Specification bus stop data from LA Metro 
+author: LA Metro
+date: October 5, 2025
 links:
-  - text: GitHub
-    href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-01-28/readme.md
+  - text: Data Source
+    href: https://gitlab.com/LACMTA/gtfs_bus/-/tree/weekly-updated-service
+  - text: Data Authors
+    href: https://developer.metro.net/gtfs-schedule-data/
 format: html
 execute: 
   warning: false
