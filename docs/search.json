@@ -26,5 +26,12 @@
     "title": "About",
     "section": "",
     "text": "This site is a site with some Tidy Tuesday datasets."
+  },
+  {
+    "objectID": "Text_analysis.html",
+    "href": "Text_analysis.html",
+    "title": "Text_analysis",
+    "section": "",
+    "text": "LA_bus_stops &lt;- read.table(\"stops.txt\", header = TRUE, sep = \",\")\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\nData Source: https://gitlab.com/LACMTA/gtfs_bus/-/tree/weekly-updated-service\nData Authors: https://developer.metro.net/gtfs-schedule-data/"
   }
 ]

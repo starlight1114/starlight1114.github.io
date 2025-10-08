@@ -4,13 +4,17 @@ description: |
   An analysis of General Transit Feed Specification bus stop data from LA Metro 
 author: LA Metro
 date: October 5, 2025
-links:
-  - text: Data Source
-    href: https://gitlab.com/LACMTA/gtfs_bus/-/tree/weekly-updated-service
-  - text: Data Authors
-    href: https://developer.metro.net/gtfs-schedule-data/
 format: html
 execute: 
   warning: false
   message: false
 ---
+
+```{r}
+LA_bus_stops <- read.table("stops.txt", header = TRUE, sep = ",")
+library(tidyverse)
+library(ggplot2)
+```
+
+-   Data Source: <https://gitlab.com/LACMTA/gtfs_bus/-/tree/weekly-updated-service>
+-   Data Authors: <https://developer.metro.net/gtfs-schedule-data/>
