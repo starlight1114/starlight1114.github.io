@@ -5,6 +5,7 @@ format:
     code-fold: true
     code-summary: "Show the code"
     code-overflow: wrap
+date: October 30, 2025
 execute: 
   warning: false
   message: false
