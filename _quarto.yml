@@ -17,6 +17,8 @@ website:
            href: Water_Insecurity.html
       - text: "Text Analysis"
         href: Text_analysis.qmd
+      - text: "Probability"
+        href: Probability.qmd
 
 format:
   html:
