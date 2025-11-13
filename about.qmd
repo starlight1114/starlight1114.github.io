@@ -2,4 +2,4 @@
 title: "About"
 ---
 
-This site is a site with some Tidy Tuesday datasets.
+This site is a site with a lot of things from DS002R.

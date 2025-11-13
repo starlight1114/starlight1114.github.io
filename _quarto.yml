@@ -19,6 +19,8 @@ website:
         href: Text_analysis.qmd
       - text: "Probability"
         href: Probability.qmd
+      - text: "Ethics"
+        href: Ethics.qmd
 
 format:
   html:

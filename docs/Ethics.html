@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Niha Pereira">
-<meta name="dcterms.date" content="2025-01-28">
-<meta name="description" content="Analysis of Water Insecurity data from TidyTuesday">
+<meta name="dcterms.date" content="2025-11-12">
 
-<title>Water Insecurity – Project Website with Art</title>
+<title>Ethics – Project Website with Art</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -77,7 +40,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5bf7ca59d8cc7f7a8155307016a58e21.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b8e0a70c4aface9ef3581a6292e99da6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -159,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Probability</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Ethics.html"> 
+    <a class="nav-link active" href="./Ethics.html" aria-current="page"> 
 <span class="menu-text">Ethics</span></a>
   </li>  
 </ul>
@@ -181,29 +144,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Water Insecurity</h1>
+<h1 class="title">Ethics</h1>
 </div>
 
-<div>
-  <div class="description">
-    <p>Analysis of Water Insecurity data from TidyTuesday</p>
-  </div>
-</div>
 
 
 <div class="quarto-title-meta column-page">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Niha Pereira </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 28, 2025</p>
+      <p class="date">November 12, 2025</p>
     </div>
   </div>
   
@@ -215,37 +167,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>water_insecurity_2022 <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-01-28/water_insecurity_2022.csv'</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>water_insecurity_2023 <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-01-28/water_insecurity_2023.csv'</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>water_insecurity <span class="ot">&lt;-</span> water_insecurity_2023 <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">848</span>)<span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">"old_percent_lacking_plumbing"</span> <span class="ot">=</span> <span class="fu">pull</span>(<span class="fu">select</span>(water_insecurity_2022, percent_lacking_plumbing))) <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">"2022"</span> <span class="ot">=</span> <span class="fu">mean</span>(old_percent_lacking_plumbing, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">"2023"</span> <span class="ot">=</span> <span class="fu">mean</span>(percent_lacking_plumbing, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>)<span class="sc">|&gt;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">"2022"</span>, <span class="st">"2023"</span>),<span class="at">names_to =</span> <span class="st">"yeare"</span>, <span class="at">values_to =</span> <span class="st">"Average_percent_lacking_plumbing"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(yeare, Average_percent_lacking_plumbing)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(water_insecurity, <span class="fu">aes</span>(<span class="at">x =</span> yeare, <span class="at">y =</span> Average_percent_lacking_plumbing)) <span class="sc">+</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Percent Without Plumbing across the US"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"(Not-so-honest) Plot of the percentage of houses without full </span><span class="sc">\n</span><span class="st">plumbing in 2022 and 2023"</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Water_Insecurity_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Citation:</p>
-<p>Elmera Azadpour and Cee Nell. <em>Mapping Water Insecurity in R with Tidycensus</em>. 9 Dec.&nbsp;2024, <a href="https://waterdata.usgs.gov/blog/acs-maps/" class="uri">https://waterdata.usgs.gov/blog/acs-maps/</a>.</p>
+<ol type="1">
+<li><p>Describe the example / scenario as if to someone who is not at all familiar with the setting. In particular, it should be clear both what is the data science component and what is the ethical dilemma.</p>
+<p>Priyanga Gunarathne, Huaxia Rui and Abraham Seidmann published a paper that claimed that airline social media representatives respond less to Twitter users when they can see that their profile picture depicts a black person. Their methods involved taking all Tweets from 2014 to 2015 that mentioned any major US airline, running the Tweets’ profile pictures through an algorithm that returned either “no face”, or tells you what race each face is, creating and training a new algorithm that predicts people’s race based on their tweets, and measuring the response rate of customer service agents depending on the race depicted in the profile is or the race predicted by all of the past tweets. The authors found that people with profile pictures that had a black person in them were 12% less likely to receive customer service through Twitter than people who had other races in their profile picture. They also found that when the person did not have a profile picture, their race, as detected by their tweet-scraping algorithm, did not have an effect on the rate at which people received customer service through Twitter. Creating the algorithm that predicts people’s race based on their tweets creates an ethical dilemma, even though the authors of this study were using the algorithm to point out an explicit case of business-to-customer racism. Algorithms like these could also be used to discriminate against people or show people different prices for items based on their social media activity. The study concluded by suggesting that social media customer service teams hide people’s profile pictures when they are doing their jobs.</p></li>
+<li><p>Respond to at least 4 of the items below (from the list of questions or the Data Values and Principles Manifesto). Four separate paragraphs that explain both the issue (e.g., consent) and how the issue played out in the data science example. Note: totally fine if there are items that were done <em>well</em> in your example.</p>
+<ul>
+<li><p>What is the permission structure for using the data? Was it followed?</p>
+<p>It is important that anyone using data from online follows the correct permission structures for collecting and publishing the data. Permission structures for using data are in place because they give everyone who is implicated in the data the privacy rights they believe they have when they publish data to a website. The authors collected data from Twitter from 2014 and 2015. Twitter’s 2014 Terms of Service document states that anyone who wants to use data from Twitter has to access it through Twitter’s API, and does not lay out any clear guidelines for what data can and cannot be used. Therefore, if the data was collected through Twitter’s API, then the authors did not break Twitter’s permission structure for collecting data. Furthermore, Twitter’s 2014 Terms of Service state that anything that you post on Twitter is “available to the rest of the world” (Twitter 2014). However, by the time this paper was submitted to be published, Twitter’s End User License Agreement stated that it was prohibited to “utilize the Twitter Content to derive or obtain non-public information of individual Twitter users” (Twitter 2020). This is exactly what these authors did by inferring people’s races by running their tweets through an algorithm.</p></li>
+<li><p>What was the data collection process? Were the observations collected ethically? Are there missing observations?</p>
+<p>In this study, the authors collected publically available Tweet and profile picture data from Twitter. The authors do not mention how they got this data, but if they were following Twitter’s terms of service, they would have had to get it using Twitter’s API. The way that these people collected this data could be seen as ethical since by posting to Twitter and making a Twitter account, any user is expected to know that anything they put there will be able to be seen by the entire world. In general, it is important to ethically collect data, since many people could be putting personal information into places and not know that it will be used for data analysis purposes. For example, collecting data from someone with the purposes of using it for a raffle and then using that data to create an email list could be problematic since the people who signed up with their personal information did not know they were signing up for promotional emails.</p></li>
+<li><p>Is the data identifiable? All of it? Some of it? In what way? Are the data sufficiently anonymized or old to be free of ethical concerns? Is anonymity guaranteed?</p>
+<p>The study did not publish anyone’s Twitter profiles or names, so I would say it is sufficiently anonymized. In this case, anonymizing data is helpful since it does not directly tie anyone’s travel patterns, calculated race, or any other personal information to this study or to any complaints they have made on Twitter. On Twitter, anonymity is not necessarily guaranteed, but people should be free to post on Twitter without fear of their tweets being used to create a racial profile of them. In general, anonymizing data is important because it makes sure that people do not see direct personal damage or harm from any data that is being published.</p></li>
+<li><p>Should race be used as a variable? Is it a proxy for something else (e.g., amount of melanin in the skin, stress of navigating microaggressions, zip-code, etc.)? What about gender?</p>
+<p>The issue of using race as a variable is an interesting one to consider, but since it effects many people’s day-to-day lives, I think it should be used as a variable. In this study, it was important that race was being used as a variable since the study proved that US airlines’ social media customer service teams were discriminating against black people. Generally, race should be used as a variable in studies, since it would be difficult to study racism against people if race is not being used as a variable.</p></li>
+</ul></li>
+<li><p>Given what you described in #3 (above), summarize by explaining why it matters. Who benefits? Who is neglected or harmed? Were the ethical violations in the interest of profit? Surveillance? Power?</p>
+<p>The conclusion that social media customer service agents should not be able to see people’s profile pictures when they are helping people is a good recommendation, especially since the authors found racial discrimination in the way that people were being helped. However, this conclusion could have been reached in a number of ways, many of which did not have to involve creating and training a brand-new race prediction algorithm. The authors also claimed that they trained the race prediction algorithm on 2,000 Tweets, and did not mention whether the people who were used in training the algorithm had any say over whether they were used to train this algorithm or not. This algorithm could possibly be used in the future to predict people’s races from their tweets and then use that prediction for nefarious purposes. The data and algorithm in this case were used to benefit black people and stop racial discrimination by companies. However, the authors should have been aware of the fact that creating a new race prediction algorithm for the sake of academic rigor has its drawbacks and could take away from marginalized communities.</p></li>
+</ol>
+<p>Citations:</p>
+<p>Gina Mantica. “Racial Discrimination of Airline Customers on Twitter.” Boston University, 10 Nov.&nbsp;2021, <a href="https://www.bu.edu/hic/2021/11/10/racial-discrimination-of-airline-customers-on-twitter/" class="uri">https://www.bu.edu/hic/2021/11/10/racial-discrimination-of-airline-customers-on-twitter/</a>.</p>
+<p>Priyanga Gunarathne, et al.&nbsp;“Racial Bias in Customer Service: Evidence from Twitter.” <em>Information Systems Research</em>, vol.&nbsp;33, no. 1, Mar.&nbsp;2022, pp.&nbsp;43–54.</p>
+<p>Twitter. “Terms of Service.” 8 Sep.&nbsp;2014, <a href="https://x.com/en/tos/previous/version_8" class="uri">https://x.com/en/tos/previous/version_8</a>.</p>
+<p>———. “Twitter Content End User License Agreement.” 1 Mar.&nbsp;2020, <a href="https://prod2-sprcdn-assets.sprinklr.com/50400/ce9f9f63-7d51-490d-b385-cc3349d32d9f-1123928880/Twitter_EULA_3.2020__Oct_2024_.pdf" class="uri">https://prod2-sprcdn-assets.sprinklr.com/50400/ce9f9f63-7d51-490d-b385-cc3349d32d9f-1123928880/Twitter_EULA_3.2020__Oct_2024_.pdf</a>.</p>
 
 
 

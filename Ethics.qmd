@@ -1,0 +1,48 @@
+---
+title: "Ethics"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+date: November 12, 2025
+execute: 
+  warning: false
+  message: false
+---
+
+1.  Describe the example / scenario as if to someone who is not at all familiar with the setting. In particular, it should be clear both what is the data science component and what is the ethical dilemma.
+
+    Priyanga Gunarathne, Huaxia Rui and Abraham Seidmann published a paper that claimed that airline social media representatives respond less to Twitter users when they can see that their profile picture depicts a black person. Their methods involved taking all Tweets from 2014 to 2015 that mentioned any major US airline, running the Tweets' profile pictures through an algorithm that returned either "no face", or tells you what race each face is, creating and training a new algorithm that predicts people's race based on their tweets, and measuring the response rate of customer service agents depending on the race depicted in the profile is or the race predicted by all of the past tweets. The authors found that people with profile pictures that had a black person in them were 12% less likely to receive customer service through Twitter than people who had other races in their profile picture. They also found that when the person did not have a profile picture, their race, as detected by their tweet-scraping algorithm, did not have an effect on the rate at which people received customer service through Twitter. Creating the algorithm that predicts people's race based on their tweets creates an ethical dilemma, even though the authors of this study were using the algorithm to point out an explicit case of business-to-customer racism. Algorithms like these could also be used to discriminate against people or show people different prices for items based on their social media activity. The study concluded by suggesting that social media customer service teams hide people's profile pictures when they are doing their jobs.
+
+2.  Respond to at least 4 of the items below (from the list of questions or the Data Values and Principles Manifesto). Four separate paragraphs that explain both the issue (e.g., consent) and how the issue played out in the data science example. Note: totally fine if there are items that were done *well* in your example.
+
+    -   What is the permission structure for using the data? Was it followed?
+
+        It is important that anyone using data from online follows the correct permission structures for collecting and publishing the data. Permission structures for using data are in place because they give everyone who is implicated in the data the privacy rights they believe they have when they publish data to a website. The authors collected data from Twitter from 2014 and 2015. Twitter's 2014 Terms of Service document states that anyone who wants to use data from Twitter has to access it through Twitter's API, and does not lay out any clear guidelines for what data can and cannot be used. Therefore, if the data was collected through Twitter's API, then the authors did not break Twitter's permission structure for collecting data. Furthermore, Twitter's 2014 Terms of Service state that anything that you post on Twitter is "available to the rest of the world" (Twitter 2014). However, by the time this paper was submitted to be published, Twitter's End User License Agreement stated that it was prohibited to "utilize the Twitter Content to derive or obtain non-public information of individual Twitter users" (Twitter 2020). This is exactly what these authors did by inferring people's races by running their tweets through an algorithm.
+
+    -   What was the data collection process? Were the observations collected ethically? Are there missing observations?
+
+        In this study, the authors collected publically available Tweet and profile picture data from Twitter. The authors do not mention how they got this data, but if they were following Twitter's terms of service, they would have had to get it using Twitter's API. The way that these people collected this data could be seen as ethical since by posting to Twitter and making a Twitter account, any user is expected to know that anything they put there will be able to be seen by the entire world. In general, it is important to ethically collect data, since many people could be putting personal information into places and not know that it will be used for data analysis purposes. For example, collecting data from someone with the purposes of using it for a raffle and then using that data to create an email list could be problematic since the people who signed up with their personal information did not know they were signing up for promotional emails.
+
+    -   Is the data identifiable? All of it? Some of it? In what way? Are the data sufficiently anonymized or old to be free of ethical concerns? Is anonymity guaranteed?
+
+        The study did not publish anyone's Twitter profiles or names, so I would say it is sufficiently anonymized. In this case, anonymizing data is helpful since it does not directly tie anyone's travel patterns, calculated race, or any other personal information to this study or to any complaints they have made on Twitter. On Twitter, anonymity is not necessarily guaranteed, but people should be free to post on Twitter without fear of their tweets being used to create a racial profile of them. In general, anonymizing data is important because it makes sure that people do not see direct personal damage or harm from any data that is being published.
+
+    -   Should race be used as a variable? Is it a proxy for something else (e.g., amount of melanin in the skin, stress of navigating microaggressions, zip-code, etc.)? What about gender?
+
+        The issue of using race as a variable is an interesting one to consider, but since it effects many people's day-to-day lives, I think it should be used as a variable. In this study, it was important that race was being used as a variable since the study proved that US airlines' social media customer service teams were discriminating against black people. Generally, race should be used as a variable in studies, since it would be difficult to study racism against people if race is not being used as a variable.
+
+3.  Given what you described in #3 (above), summarize by explaining why it matters. Who benefits? Who is neglected or harmed? Were the ethical violations in the interest of profit? Surveillance? Power?
+
+    The conclusion that social media customer service agents should not be able to see people's profile pictures when they are helping people is a good recommendation, especially since the authors found racial discrimination in the way that people were being helped. However, this conclusion could have been reached in a number of ways, many of which did not have to involve creating and training a brand-new race prediction algorithm. The authors also claimed that they trained the race prediction algorithm on 2,000 Tweets, and did not mention whether the people who were used in training the algorithm had any say over whether they were used to train this algorithm or not. This algorithm could possibly be used in the future to predict people's races from their tweets and then use that prediction for nefarious purposes. The data and algorithm in this case were used to benefit black people and stop racial discrimination by companies. However, the authors should have been aware of the fact that creating a new race prediction algorithm for the sake of academic rigor has its drawbacks and could take away from marginalized communities.
+
+Citations:
+
+Gina Mantica. “Racial Discrimination of Airline Customers on Twitter.” Boston University, 10 Nov. 2021, <https://www.bu.edu/hic/2021/11/10/racial-discrimination-of-airline-customers-on-twitter/>.
+
+Priyanga Gunarathne, et al. “Racial Bias in Customer Service: Evidence from Twitter.” *Information Systems Research*, vol. 33, no. 1, Mar. 2022, pp. 43–54.
+
+Twitter. “Terms of Service.” 8 Sep. 2014, <https://x.com/en/tos/previous/version_8>.
+
+———. “Twitter Content End User License Agreement.” 1 Mar. 2020, <https://prod2-sprcdn-assets.sprinklr.com/50400/ce9f9f63-7d51-490d-b385-cc3349d32d9f-1123928880/Twitter_EULA_3.2020__Oct_2024_.pdf>.
