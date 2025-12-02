@@ -1,0 +1,229 @@
+---
+title: "SQL"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+date: December 1, 2025
+execute: 
+  warning: false
+  message: false
+---
+
+In this project, I want to see if race plays a factor in whether people get arrested, a citation, or a warning when they are stopped. I plan to compare the proportion of stops that end in citations and arrests across the recorded races in San Francisco, Oakland, and San Jose. The end goal of this project is to show a table with the percentages of traffic stops in each city that end in arrests, citations, and warnings and compare the data across races. I ask this question because I am curious what data can show about race playing a role in the outcome of traffic stops, since racial bias can often play a role in these outcomes.
+
+```{r}
+library(tidyverse)
+library(RMariaDB)
+library(DBI)
+con_traffic <- DBI::dbConnect(
+  RMariaDB::MariaDB(),
+  dbname = "traffic",
+  host = Sys.getenv("TRAFFIC_HOST"),
+  user = Sys.getenv("TRAFFIC_USER"),
+  password = Sys.getenv("TRAFFIC_PWD")
+)
+```
+
+-   a reference / documentation of the data source (see below, make sure to include the citation!)
+
+```{sql}
+#| connection: con_traffic
+#| output.var: "table_list"
+SHOW tables
+```
+
+San Francisco:
+
+```{sql}
+#| connection: con_traffic
+#| #| output.var: "outcome_check_SF"
+SELECT outcome, COUNT(*) AS n
+FROM ca_san_francisco_2020_04_01
+GROUP BY outcome;
+```
+
+```{sql}
+#| connection: con_traffic
+
+SELECT citable.subject_race AS 'Race of Subject',
+        total.number_stops AS 'Total Stops',
+        citable.number_citations / total.number_stops * 100 AS 'Citations %',
+        warntable.number_warnings / total.number_stops * 100 AS 'Warnings %',
+        arrest.number_arrest / total.number_stops * 100 AS 'Arrests %',
+        na.null_stops / total.number_stops * 100 AS 'Other Outcome %'
+        
+FROM(
+SELECT subject_race,
+COUNT(*) AS number_citations
+FROM ca_san_francisco_2020_04_01 
+WHERE outcome = 'citation'
+GROUP BY subject_race
+) AS citable
+
+JOIN 
+
+(SELECT subject_race,
+COUNT(*) AS number_warnings
+FROM ca_san_francisco_2020_04_01
+WHERE outcome = 'warning'
+GROUP BY subject_race) AS warntable ON citable.subject_race = warntable.subject_race
+
+JOIN
+
+(SELECT subject_race,
+COUNT(*) AS number_arrest
+FROM ca_san_francisco_2020_04_01
+WHERE outcome != 'warning' AND outcome != 'citation'
+GROUP BY subject_race) AS arrest ON citable.subject_race = arrest.subject_race
+
+JOIN
+
+(SELECT subject_race,
+COUNT(*) AS number_stops
+FROM ca_san_francisco_2020_04_01
+GROUP BY subject_race) AS total ON citable.subject_race = total.subject_race
+
+JOIN
+
+(SELECT subject_race,
+COUNT(*) AS null_stops
+FROM ca_san_francisco_2020_04_01
+WHERE outcome IS NULL
+GROUP BY subject_race) AS na ON citable.subject_race = na.subject_race
+
+ORDER BY citable.number_citations DESC;
+```
+
+Each row in this table (and the following 2 tables) corresponds to a racial group of people that have been stopped by the police. The columns tell you what percentage of the traffic stops conducted on each race of people have ended in citations, arrests, warnings, or any other outcome. The racial groups in all three tables are ordered by the total number of stops made to people in that group during the dataset's timeframe.
+
+This table shows that in San Francisco, black and Hispanic people have a higher rate of arrest, 2.3% and 2.0% respectively from a traffic stop than white, Asian, and people who do not fit these racial categories. It also shows that black people have a higher rate of receiving warnings than the other races at 40% compared to 27%, 20%, 21%, and 27%. It seems like Asian/Pacific Islander people, white people, and people who do not fit the given racial categories have the highest rates of citation in San Francisco.
+
+Oakland:
+
+```{sql}
+#| connection: con_traffic
+#| output.var: "outcome_check_oak"
+SELECT outcome, COUNT(*) AS n
+FROM ca_oakland_2020_04_01
+GROUP BY outcome;
+```
+
+```{sql}
+#| connection: con_traffic
+
+SELECT citable.subject_race AS 'Race of Subject',
+        total.number_stops AS 'Total Stops',
+        citable.number_citations / total.number_stops * 100 AS 'Citations %',
+        warntable.number_warnings / total.number_stops * 100 AS 'Warnings %',
+        arrest.number_arrest / total.number_stops * 100 AS 'Arrests %',
+        na.null_stops / total.number_stops * 100 AS 'Other Outcome %'
+        
+FROM(
+SELECT subject_race,
+COUNT(*) AS number_citations
+FROM ca_oakland_2020_04_01 
+WHERE outcome = 'citation'
+GROUP BY subject_race
+) AS citable
+
+JOIN 
+
+(SELECT subject_race,
+COUNT(*) AS number_warnings
+FROM ca_oakland_2020_04_01
+WHERE outcome = 'warning'
+GROUP BY subject_race) AS warntable ON citable.subject_race = warntable.subject_race
+
+JOIN
+
+(SELECT subject_race,
+COUNT(*) AS number_arrest
+FROM ca_oakland_2020_04_01
+WHERE outcome != 'warning' AND outcome != 'citation'
+GROUP BY subject_race) AS arrest ON citable.subject_race = arrest.subject_race
+
+JOIN
+
+(SELECT subject_race,
+COUNT(*) AS number_stops
+FROM ca_oakland_2020_04_01
+GROUP BY subject_race) AS total ON citable.subject_race = total.subject_race
+
+JOIN
+
+(SELECT subject_race,
+COUNT(*) AS null_stops
+FROM ca_oakland_2020_04_01
+WHERE outcome IS NULL
+GROUP BY subject_race) AS na ON citable.subject_race = na.subject_race
+
+ORDER BY citable.number_citations DESC 
+;
+```
+
+In Oakland, Hispanic, white, Asian/Pacific Islander, and people who do not fit the racial categories have the highest rates of citation at 48%, 47%, 49%, and 51% respectively, although the number of "other" people in this dataset is relatively small. Black people have a higher rate of receiving warnings from traffic stops than the other races, and a significantly higher rate of being arrested.
+
+San Jose:
+
+```{sql}
+#| connection: con_traffic
+#| output.var: "outcome_check_sj"
+SELECT outcome, COUNT(*) AS n
+FROM ca_san_jose_2020_04_01
+GROUP BY outcome;
+```
+
+```{sql}
+#| connection: con_traffic
+
+SELECT citable.subject_race  AS 'Race of Subject',
+        total.number_stops AS 'Total Stops',
+        citable.number_citations / total.number_stops * 100 AS 'Citations %',
+        arrest.number_arrest / total.number_stops * 100 AS 'Arrests %',
+        na.null_stops / total.number_stops * 100 AS 'Other Outcome %'
+        
+FROM(
+SELECT subject_race,
+COUNT(*) AS number_citations
+FROM ca_san_jose_2020_04_01
+WHERE outcome = 'citation'
+GROUP BY subject_race
+) AS citable
+
+JOIN
+
+(SELECT subject_race,
+COUNT(*) AS number_arrest
+FROM ca_san_jose_2020_04_01
+WHERE outcome = 'arrest' 
+GROUP BY subject_race) AS arrest ON citable.subject_race = arrest.subject_race
+
+JOIN
+
+(SELECT subject_race,
+COUNT(*) AS number_stops
+FROM ca_san_jose_2020_04_01
+GROUP BY subject_race) AS total ON citable.subject_race = total.subject_race
+
+JOIN
+
+(SELECT subject_race,
+COUNT(*) AS null_stops
+FROM ca_san_jose_2020_04_01
+WHERE outcome IS NULL
+GROUP BY subject_race) AS na ON citable.subject_race = na.subject_race
+
+ORDER BY citable.number_citations DESC;
+```
+
+San Jose did not keep track of warnings, so all of their warning data has probably been aggregated with the "Other Outcome %" category. In San Jose, Hispanic and black people have the highest rate of arrest, and Asian/Pacific Islander and "other" people have the highest rate of citation.
+
+```{r}
+dbDisconnect(con_traffic, shutdown = TRUE)
+```
+
+To achieve my goals of showing the number of stops that ended with citations, I first checked the "outcome" variable in the table that I was working with to see what outcomes it counted. Then, I counted the number of citations, arrests, warnings (which were only counted in San Francisco and Oakland), and N/A values for each race in each city and divided them by the total number of stops in each city. Then, I joined the tables by the race of the person who was stopped so that all of the information that I just counted lived in the same table.
+
+Across all three Bay Area cities, black and Hispanic people had the highest rate of arrest from a traffic stop. This could possibly indicate racial bias in the way that those racial groups are policed, and how officers go about conducting traffic stops with these people.

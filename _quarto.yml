@@ -21,6 +21,8 @@ website:
         href: Probability.qmd
       - text: "Ethics"
         href: Ethics.qmd
+      - text: "SQL"
+        href: SQL.qmd
 
 format:
   html:
