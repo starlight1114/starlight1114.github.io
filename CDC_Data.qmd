@@ -2,11 +2,7 @@
 title: "CDC Data"
 description: |
   Analysis of CDC data from TidyTuesday
-author: Jon Harmon
-date: February 11, 2025
-links:
-  - text: GitHub
-    href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-02-11/readme.md 
+date: September 24, 2025
 format: html
 execute: 
   warning: false
@@ -37,6 +33,12 @@ dc_datasets |>
   )
 ```
 
-Citation:
+Citations:
+
+Original Data:
 
 “Files for 20250128-Cdc-Datasets.” *Internet Archive*, <https://archive.org/download/20250128-cdc-datasets>.
+
+GitHub Repo:
+
+Jon Harmon, February 11, 2025. <https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-02-11/readme.md>

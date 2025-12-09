@@ -2,8 +2,7 @@
 title: "Text Analysis"
 description: |
   An analysis of General Transit Feed Specification bus stop data from LA Metro 
-author: LA Metro
-date: October 5, 2025
+date: October 8, 2025
 format:
   html:
     code-fold: true
@@ -13,6 +12,8 @@ execute:
   warning: false
   message: false
 ---
+
+This project reads a spreadsheet that contains the names of every LA Metro bus stop in Los Angeles and counts how many of them are on a specific street. Most of the stop names in LA Metro's spreadsheet are written like Street / Cross Street, so I used regular expressions to separate the names and count how many of them are on each street. I also counted the length of the every stop's name in characters and plotted it on a histogram.
 
 ```{r}
 #Create dataframe from the .txt file
@@ -83,5 +84,10 @@ This table was created in the same way as the table above and then filtered to o
 
 This analysis comes from publicly-available GTFS data provided by LA Metro.
 
--   Data Source: <https://gitlab.com/LACMTA/gtfs_bus/-/tree/weekly-updated-service>
--   Data Authors: <https://developer.metro.net/gtfs-schedule-data/>
+Data Source:
+
+LA Metro. "GTFS Schedule Data" <https://developer.metro.net/gtfs-schedule-data/>
+
+Repository:
+
+LA Metro. "LA Metro Bus GTFS." October 5, 2025. <https://gitlab.com/LACMTA/gtfs_bus/-/tree/weekly-updated-service>

@@ -206,8 +206,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This project is inspired by a walk I took on last Saturday night. That night, I chose to walk around the 5Cs for around 3 hours, and I ran into around 8 of my close friends and had a lot of fun. As I walked, I ran into different sized groups of people, sometimes I would pass no one and sometimes I would pass huge groups of people.</p>
-<p>I chose to model the group sizes using an exponentially distributed set of random numbers with a rate of 0.25 since I approximate that I would run into an average of 4 people per minute.</p>
+<p>This project is inspired by a walk I took on last Saturday night. That night, I chose to walk around the 5Cs for around 3 hours, and I ran into around 8 of my close friends and had a lot of fun. As I walked, I ran into different sized groups of people, sometimes I would pass no one and sometimes I would pass huge groups of people. My goal for this assignment is to answer the question, “What is the probability that I run into ‘X’ number of friends on a given night of walking around the 5Cs?”. I then want to use this calculation to see whether my Saturday night where I ran into 8 people could have happened randomly or if there were external factors that played into the number of friends that I saw.</p>
+<p>I chose to model the group sizes using a discrete exponentially distributed set of random numbers with a rate of 0.25 since I approximate that I would run into an average of 4 people per minute.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This plot shows how many times I see a certain amount of people each minute if I walk around for 180 minutes. It shows that in this case, I would most commonly see 0 people per minute during my walk, followed by 1 people per minute, then 2 people per minute.</p>
+<p>This plot shows how many times I see a certain number of people each minute if I walk around for 180 minutes. It shows that in this case, I would most commonly see 0 people per minute during my walk, followed by 1 people per minute, then 2 people per minute.</p>
 <p>Each person in each group of people I pass gets assigned a random number which indicates their closeness to me. I say that I am equally likely to see anyone from my closest friend (1) to my least close friend at the 5Cs (6000). For example, if I passed 2 people in the same minute (the randomly generated exponentially distributed number from before), my 5th closest friend and my 16th closest friend, that minute would be given the vector (5, 16). Then, I take the random numbers that have been generated for each minute and put them into one long vector, basically the vector of people I have seen throughout the entire night.</p>
 <div class="cell">
 <details class="code-fold">
@@ -239,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pass random people walking around the 5Cs</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>start_walking_for <span class="ot">&lt;-</span> <span class="cf">function</span>(number_of_minutes, how_close){</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  people_passed <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(<span class="dv">1</span><span class="sc">:</span>number_of_minutes, <span class="cf">function</span>(x){</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rexp</span>(<span class="dv">1</span>, exprate))}) <span class="co">#vector of the number of people I pass every minute</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">floor</span>(<span class="fu">rexp</span>(<span class="dv">1</span>, exprate))}) <span class="co">#vector of the number of people I pass every minute</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  list_of_people <span class="ot">&lt;-</span> <span class="fu">map</span>(people_passed, <span class="cf">function</span>(x){<span class="fu">round</span>(<span class="fu">runif</span>(x, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">6000</span>))})</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  vector_of_people <span class="ot">&lt;-</span> <span class="fu">unlist</span>(list_of_people) <span class="co">#Time steps do not matter, so it doesn't matter if I see someone in minute 1 or minute 156.</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(vector_of_people <span class="sc">&lt;=</span> how_close) <span class="co">#How many times do I see someone who is my close friend?</span></span>
@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(simulation) <span class="sc">+</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> friends_seen), <span class="at">binwidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How many times do I see a certain amount of friends in one night?"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How many times do I see a certain number of friends in one night?"</span>,</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"Total nights = "</span>, nights),</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Number of friends seen"</span>,</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of nights walking around"</span></span>
@@ -274,9 +274,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This plot shows that it is very unlikely to have a night like my Saturday night where I saw 8 of my close friends. This means that either I am more likely to see my friends than non-friends (which is true since I knew where they generally were that night and used Find My once to find a friend), that I saw more people on my walk than I estimated, or that I am closer with more people than I estimated.</p>
-<p>The plot also shows that I am most likely to see one friend on a given 3-hour walk, but for about 900 of my 5000 simulated walks, I see no friends.</p>
-<p>To simulate my random night walks around the 5Cs, I generated randomly sized groups of people that I saw every minute that usually ranged from 0 to around 18 people. Then, I gave each person in that group a random “closeness score” to me, which indicated how well I knew them. Then, I counted how many times I ran into people that were a certain degree of closeness to me, and ran that simulation many times to determine what the most likely outcome of a night of randomly walking around the 5C campus was (in places where other people also go).</p>
+<p>This plot shows that it is very unlikely to have a night like my Saturday night where I saw 8 of my close friends. This means that either I was more likely to see my friends than non-friends on Saturday (which is true since I knew where they generally were that night and used Find My once to find a friend), that I saw more people on my walk than I estimated, or that I am closer with more people than I estimated.</p>
+<p>The plot also shows that I am most likely to see one friend on a given 3-hour walk, but for about 1100 of my 5000 simulated walks, I see no friends.</p>
+<p>To simulate my weekend night walks around the 5Cs, I generated randomly sized groups of people that I saw every minute that usually ranged from 0 to around 18 people. Then, I gave each person in that group a random “closeness score” to me, which indicated how well I knew them. Then, I counted how many times I ran into people that were a certain degree of closeness to me, and ran that simulation many times to determine what the most likely outcome of a night of randomly walking around the 5C campus was (in places where other people also go).</p>
 <p>One way that this model could be improved is to account for my arrival to points of interest where many people congregate at once like Jay’s Place, the Hub, or parties. Another way that this simulation could be improved is to account for the fact that most of my friends are friends with each other, so they are more likely to be traveling in a group together than dispersed among many groups of people.</p>
 
 

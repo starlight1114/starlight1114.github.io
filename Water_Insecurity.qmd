@@ -2,11 +2,7 @@
 title: "Water Insecurity"
 description: |
   Analysis of Water Insecurity data from TidyTuesday
-author: Niha Pereira
-date: January 28, 2025
-links:
-  - text: GitHub
-    href: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-01-28/readme.md
+date: September 24, 2025
 format: html
 execute: 
   warning: false
@@ -38,6 +34,12 @@ ggplot(water_insecurity, aes(x = yeare, y = Average_percent_lacking_plumbing)) +
   
 ```
 
-Citation:
+Citations:
+
+Original Data:
 
 Elmera Azadpour and Cee Nell. *Mapping Water Insecurity in R with Tidycensus*. 9 Dec. 2024, <https://waterdata.usgs.gov/blog/acs-maps/>.
+
+GitHub Repo:
+
+Niha Pereira, January 28, 2025 <https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-01-28/readme.md>
