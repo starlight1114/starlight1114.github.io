@@ -42,7 +42,7 @@ Each person in each group of people I pass gets assigned a random number which i
 start_walking_for <- function(number_of_minutes, how_close){
   people_passed <- map_dbl(1:number_of_minutes, function(x){
     floor(rexp(1, exprate))}) #vector of the number of people I pass every minute
-  list_of_people <- map(people_passed, function(x){round(runif(x, min = 1, max = 6000))})
+  list_of_people <- map(people_passed, function(x){sample(1:6000, x, replace = TRUE)})
   vector_of_people <- unlist(list_of_people) #Time steps do not matter, so it doesn't matter if I see someone in minute 1 or minute 156.
   sum(vector_of_people <= how_close) #How many times do I see someone who is my close friend?
 }
