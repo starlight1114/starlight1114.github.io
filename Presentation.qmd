@@ -1,0 +1,108 @@
+---
+title: "Walking Around the 5Cs"
+author: "Adrián Blanco"
+subtitle: "December 10, 2025"
+format:
+  revealjs:
+    scrollable: true
+    slide-number: true
+    show-slide-number: all
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+```{r}
+#| echo: false
+library(tidyverse)
+sample_distribution <- knitr::include_graphics("Sample_dist.png")
+final_results <- knitr::include_graphics("Prob_results.png")
+```
+
+## Background Information
+
+- My favorite thing to do on weekend nights this semester has been walking around and seeing people.
+- The Saturday night before this project was due I had a really fun night where I ran into at least 8 of my close friends.
+- My question: "What is the probability that I run into 'X' number of friends on a given night of walking around the 5Cs?"
+
+
+## General Overview
+
+- I walk for 3 hours (180 minutes).
+- I pass a certain number of people every minute.
+- Each of those people lie somewhere on the scale between my closest friend at the 5Cs and the most complete stranger I could come across at the 5Cs.
+
+## How I Created the Model
+
+- I created a distribution of the number of people I pass each minute.
+- The rate for this distribution is 1/4, which means I would see an average of 4 people each minute.
+
+```{r}
+set.seed(14)
+exprate <- 0.25
+data.frame(n = map_dbl(1:180, function(x){
+    floor(rexp(1, exprate))})) 
+```
+
+## How I Created the Model
+
+```{r}
+#| echo: false
+#| fig.cap: "This plot shows how many times I see a certain number of people each minute if I walk around for 180 minutes."
+sample_distribution
+```
+
+
+
+## How I Created the Model
+
+- Who is in these groups of people that I pass each minute?
+- Assign each person in each group a number between 1 and 6000.
+```{r}
+#| code-line-numbers: "|3-5|6-7|11-12|"
+#pass random people walking around the 5Cs
+start_walking_for <- function(number_of_minutes, how_close){
+  people_passed <- map_dbl(1:number_of_minutes, function(x){
+    floor(rexp(1, exprate))}) 
+      #vector of the number of people I pass every minute
+  list_of_people <- map(people_passed, function(x){
+    round(runif(x, min = 1, max = 6000))})
+  vector_of_people <- unlist(list_of_people) 
+    #Time steps do not matter, 
+    #so it doesn't matter if I see someone in minute 1 or minute 156.
+  sum(vector_of_people <= how_close) 
+    #How many times do I see someone who is my close friend?
+}
+```
+
+## Results
+- Run this simulation 5000 times to see the likelihood I run into 8 of my friends is.
+
+```{r}
+walking_time <- 180
+friends <- 15
+nights <- 5000  
+
+data.frame(friends_seen = 
+             map_dbl(1:nights, ~start_walking_for(walking_time, friends)))
+```
+
+## Results
+```{r}
+#| echo: false
+#| fig.cap: "This plot shows that it is very unlikely to have a night like my Saturday night where I saw 8 of my close friends."
+final_results
+```
+
+## Interpreting Results
+:::{.incremental}
+- Why could this be?
+- I have more friends than I estimated.
+- I passed more people that night than I estimated.
+- I am not actually passing random people.
+:::
+
+# Thank you!
+Back to the original website:\n
+<https://starlight1114.github.io>

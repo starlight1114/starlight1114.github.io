@@ -23,6 +23,8 @@ website:
         href: Ethics.qmd
       - text: "SQL"
         href: SQL.qmd
+      - text: "Presentation"
+        href: Presentation.qmd
 
 format:
   html:

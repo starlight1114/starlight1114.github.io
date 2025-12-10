@@ -33,7 +33,7 @@ ggplot(random_exponent, aes(x = n))+
   )
 ```
 
-This plot shows how many times I see a certain number of people each minute if I walk around for 180 minutes. It shows that in this case, I would most commonly see 0 people per minute during my walk, followed by 1 people per minute, then 2 people per minute.
+This plot shows how many times I see a certain number of people each minute if I walk around for 180 minutes. It shows that in this case, I would most commonly see 0 people per minute during my walk, followed by 1 person per minute, then 2 people per minute.
 
 Each person in each group of people I pass gets assigned a random number which indicates their closeness to me. I say that I am equally likely to see anyone from my closest friend (1) to my least close friend at the 5Cs (6000). For example, if I passed 2 people in the same minute (the randomly generated exponentially distributed number from before), my 5th closest friend and my 16th closest friend, that minute would be given the vector (5, 16). Then, I take the random numbers that have been generated for each minute and put them into one long vector, basically the vector of people I have seen throughout the entire night.
 
